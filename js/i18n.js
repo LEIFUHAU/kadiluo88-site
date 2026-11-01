@@ -88,8 +88,8 @@ var I18N = {
     /* factory */
     "fac.eyebrow": "Our Factory",
     "fac.titleHtml": "Design, R&amp;D, production &amp; sales <em>in one plant.</em>",
-    "fac.intro": "Guangzhou Catillo Packaging Products Co., Ltd. was established in 2008 and occupies more than 14,000 square metres. Specialising in perfume glass packaging, we integrate design, R&D, manufacturing and sales to serve fragrance brands at home and abroad.",
-    "fac.note": "Over 100 skilled craftsmen with a daily output above 200,000 pieces. Ready stock is held on hand; factory visits and business discussions are warmly welcome.",
+    "fac.intro": "Founded in 2008, Guangzhou Catillo Packaging Products Co., Ltd. is a professional manufacturer specializing in perfume bottles and packaging solutions. With a factory area of more than 14,000 square meters, we integrate design, R&D, manufacturing, and sales. Our facility is equipped with advanced molding, frosting, gold and silver hot stamping, silk-screen printing, drying, spraying, and material-processing equipment, together with integrated production lines. Supported by over 100 employees and years of manufacturing experience, our daily output exceeds 200,000 pieces. We focus on premium glass bottles, perfume bottles, diffuser bottles, and customized mold-molded products.",
+    "fac.note": "With reliable quality, sufficient ready stock, and responsive after-sales service, we provide dependable packaging solutions to customers worldwide. Catillo is committed to quality products and stable supply, and welcomes partners from around the world to visit our factory, discuss ideas, and explore long-term cooperation.",
 
     /* contact */
     "cta.eyebrow": "Get in touch",
@@ -199,8 +199,8 @@ var I18N = {
 
     "fac.eyebrow": "工厂实力",
     "fac.titleHtml": "设计、研发、生产、销售<em>一体工厂。</em>",
-    "fac.intro": "广州卡蒂洛包装制品有限公司成立于 2008 年，工厂面积逾 14,000 平方米，专业从事香水瓶玻璃包装，集设计、研发、生产、销售于一体，服务国内外香水品牌。",
-    "fac.note": "百余名熟练技工，日产 20 万只以上；常备现货供应充足，欢迎莅临工厂参观、洽谈合作。",
+    "fac.intro": "广州卡蒂洛包装制品有限公司成立于2008年，工厂占地面积逾14,000平方米，是一家集设计、研发、生产与销售于一体的专业香水瓶及包装材料生产企业。公司拥有开模、蒙砂、烫金、烫银、丝印、烘干、喷涂及配料等先进设备，并配备一体化生产线。凭借多年的生产与销售经验，公司现有员工100余人，日产能超过20万件。我们专注于高档玻璃瓶、香水瓶、香薰瓶及各类定制模设计产品。",
+    "fac.note": "我们以稳定的品质、充足的现货供应和完善的售后服务，为海内外客户提供可靠的包装解决方案。卡蒂洛始终以客户需求为中心，致力于提供高品质产品和持续稳定的供货能力，赢得了广大客户的信任与合作。我们诚邀各界朋友莅临参观、指导与洽谈合作。",
 
     "cta.eyebrow": "联系我们",
     "cta.titleHtml": "一起打造你的<br /><em>专属香水瓶。</em>",
