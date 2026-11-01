@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initHeroParallax();
   initMouseParallax();
   initLightbox();
+  initFeaturedRail();
 });
 
 /* ---------- Scroll Reveal ---------- */
@@ -389,4 +390,69 @@ function initLightbox() {
     else if (e.key === 'ArrowLeft') step(-1);
     else if (e.key === 'ArrowRight') step(1);
   });
+}
+
+/* ---------- Featured works horizontal rail: buttons / wheel / drag / progress ---------- */
+function initFeaturedRail() {
+  var rail = document.getElementById('featuredRail');
+  if (!rail) return;
+  var section = rail.closest('.section--featured');
+  var bar = section ? section.querySelector('.featured-progress__bar') : null;
+  var prev = section ? section.querySelector('.rail-btn[data-dir="-1"]') : null;
+  var next = section ? section.querySelector('.rail-btn[data-dir="1"]') : null;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function cardStep() {
+    var card = rail.querySelector('.featured-card');
+    return card ? card.getBoundingClientRect().width + 24 : 280;
+  }
+  function updateProgress() {
+    var max = rail.scrollWidth - rail.clientWidth;
+    if (bar) {
+      var ratio = rail.clientWidth / rail.scrollWidth;
+      bar.style.width = (ratio * 100).toFixed(2) + '%';
+      var p = max > 0 ? rail.scrollLeft / max : 0;
+      var travel = (1 - ratio) * 100;
+      bar.style.transform = 'translateX(' + (p * travel).toFixed(2) + '%)';
+    }
+    if (prev && next) {
+      prev.disabled = rail.scrollLeft <= 2;
+      next.disabled = rail.scrollLeft >= max - 2;
+    }
+  }
+
+  if (prev) prev.addEventListener('click', function () {
+    rail.scrollBy({ left: -cardStep(), behavior: reduced ? 'auto' : 'smooth' });
+  });
+  if (next) next.addEventListener('click', function () {
+    rail.scrollBy({ left: cardStep(), behavior: reduced ? 'auto' : 'smooth' });
+  });
+
+  // Vertical wheel -> horizontal shift when the rail can scroll sideways
+  rail.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      var max = rail.scrollWidth - rail.clientWidth;
+      if (max > 0) { e.preventDefault(); rail.scrollLeft += e.deltaY; }
+    }
+  }, { passive: false });
+
+  // Desktop mouse drag (touch uses native scrolling)
+  var down = false, startX = 0, startLeft = 0;
+  rail.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'touch') return;
+    down = true; startX = e.clientX; startLeft = rail.scrollLeft;
+    rail.classList.add('dragging');
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    rail.scrollLeft = startLeft - (e.clientX - startX);
+  });
+  window.addEventListener('pointerup', function () {
+    down = false;
+    rail.classList.remove('dragging');
+  });
+
+  rail.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
 }

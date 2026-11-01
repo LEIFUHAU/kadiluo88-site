@@ -118,6 +118,8 @@ var I18N = {
     "trust.d5": "In-house inspection before bulk shipment; factory visits welcome.",
     "trust.t6": "OEM & Custom Mold",
     "trust.d6": "Custom shapes, finishes and packaging developed on request.",
+    "feat.eyebrow": "Featured Works",
+    "feat.titleHtml": "Selected <em>Representative Bottles</em>",
 
     /* footer */
     "foot.tag": "Perfume & Diffuser Glass Bottles",
@@ -240,6 +242,8 @@ var I18N = {
     "trust.d5": "大货出厂前内部质检，欢迎验厂参观。",
     "trust.t6": "定制开模",
     "trust.d6": "可按需开模定制瓶型、工艺与包装。",
+    "feat.eyebrow": "精选代表作",
+    "feat.titleHtml": "精选 <em>代表瓶型</em>",
 
     "foot.tag": "香水与香薰玻璃瓶",
     "foot.col1": "产品",
