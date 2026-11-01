@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function initScrollReveal() {
   const revealTargets = document.querySelectorAll(
     '.section__head, .collections, .shapes, .craft-grid, ' +
-    '.custom-wrap, .factory-grid, .certs, .details, .faq, .cta-head, .quote-form'
+    '.custom-wrap, .factory-grid, .certs, .details, .faq, .cta-head, .quote-form, .cat-head'
   );
 
   revealTargets.forEach(function (el) {

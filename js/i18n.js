@@ -32,18 +32,18 @@ var I18N = {
     /* collections intro */
     "coll.eyebrow": "Collections",
     "coll.titleHtml": "Three silhouette families of <em>glass bottles.</em>",
-    "coll.r.name": "Round Cylinders",
+    "coll.r.name": "Straight Round Bottles",
     "coll.r.desc": "Straight round bottles, 30–100 ml",
-    "coll.s.name": "Square & Flat",
+    "coll.s.name": "Square Bottles",
     "coll.s.desc": "Rectangular, flat-square bottles",
     "coll.sp.name": "Special Shapes",
     "coll.sp.desc": "Decorative & custom-mold silhouettes",
 
     /* collapsible category heads */
-    "cat.r.eyebrow": "01 — Round Cylinders",
-    "cat.r.titleHtml": "Round <em>Round Cylinder</em>",
-    "cat.s.eyebrow": "02 — Square & Flat",
-    "cat.s.titleHtml": "Square <em>Square Bottle</em>",
+    "cat.r.eyebrow": "01 — Straight Round Bottles",
+    "cat.r.titleHtml": "Straight Round <em>Bottles</em>",
+    "cat.s.eyebrow": "02 — Square Bottles",
+    "cat.s.titleHtml": "Square <em>Bottles</em>",
     "cat.sp.eyebrow": "03 — Special Shapes",
     "cat.sp.titleHtml": "Special <em>Special Shape</em>",
 
@@ -112,7 +112,7 @@ var I18N = {
     "foot.col1": "Products",
     "foot.col2": "Company",
     "foot.col3": "Connect",
-    "foot.p1": "Round Cylinders",
+    "foot.p1": "Straight Round Bottles",
     "foot.p2": "Square Bottles",
     "foot.p3": "Special Shapes",
     "foot.p4": "Custom Solutions",
@@ -156,7 +156,7 @@ var I18N = {
     "coll.sp.desc": "造型款与开模定制瓶型",
 
     "cat.r.eyebrow": "01 — 直圆瓶",
-    "cat.r.titleHtml": "直圆瓶 <em>Round Cylinder</em>",
+    "cat.r.titleHtml": "直圆瓶 <em>Straight Round Bottle</em>",
     "cat.s.eyebrow": "02 — 方瓶",
     "cat.s.titleHtml": "方瓶 <em>Square Bottle</em>",
     "cat.sp.eyebrow": "03 — 异形瓶",
@@ -237,7 +237,7 @@ var I18N = {
 /* Batch (repeated / structured) translations */
 var I18N_BATCH = {
   cards: {
-    round:   { name: { en: "Round Cylinder", zh: "直圆瓶" },
+    round:   { name: { en: "Straight Round Bottle", zh: "直圆瓶" },
                spec: { en: "30 / 50 / 100 ml · 15 mm crimp neck", zh: "30 / 50 / 100 ml · 15 mm 卡口" } },
     square:  { name: { en: "Square Bottle", zh: "方瓶" },
                spec: { en: "30 / 50 / 100 ml · 15–18 mm neck", zh: "30 / 50 / 100 ml · 15–18 mm 瓶口" } },
@@ -245,7 +245,7 @@ var I18N_BATCH = {
                spec: { en: "Custom ml · Neck finish on request", zh: "容量定制 · 瓶口规格按需" } }
   },
   optsProduct: {
-    en: ["Round Cylinder Bottle", "Square / Flat Bottle", "Special Shape Bottle", "Full Bottle Set"],
+    en: ["Straight Round Bottle", "Square Bottle", "Special Shape Bottle", "Full Bottle Set"],
     zh: ["直圆瓶", "方瓶 / 扁瓶", "异形瓶", "整瓶套装"]
   },
   optsQty: {
