@@ -1178,6 +1178,41 @@ ul { list-style: none; }
 .reveal-stagger.is-visible > *:nth-child(9) { transition-delay: 0.85s; opacity: 1; transform: translateY(0); }
 .reveal-stagger.is-visible > *:nth-child(10) { transition-delay: 0.95s; opacity: 1; transform: translateY(0); }
 
+/* ---------- Alternating left / right staggered reveal ---------- */
+.reveal-stagger--alt > * {
+  opacity: 0;
+  transform: translateX(34px) translateY(18px);
+  transition: opacity 0.8s var(--ease), transform 0.85s var(--ease);
+}
+.reveal-stagger--alt > *:nth-child(odd) { transform: translateX(-34px) translateY(18px); }
+.reveal-stagger--alt.is-visible > *,
+.reveal-stagger--alt.is-visible > *:nth-child(odd) {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
+
+/* ---------- Section title gold underline draw-in ---------- */
+.section__title::after {
+  content: "";
+  display: block;
+  width: 76px;
+  height: 2px;
+  margin-top: 26px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s var(--ease) 0.15s;
+}
+.section__head.is-visible .section__title::after { transform: scaleX(1); }
+.section__head--center .section__title::after {
+  margin-left: auto;
+  margin-right: auto;
+  transform-origin: center center;
+}
+
+/* ---------- Hero subtle parallax target ---------- */
+.hero__image { will-change: transform; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .section { padding: 120px 0; }
@@ -1259,10 +1294,16 @@ ul { list-style: none; }
   }
   .marquee__track { animation: none; }
   .reveal,
-  .reveal-stagger > * {
+  .reveal-stagger > *,
+  .reveal-stagger--alt > * {
     opacity: 1 !important;
     transform: none !important;
   }
+  .section__title::after {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+  .hero__image { will-change: auto !important; transform: none !important; }
 }
 
 /* ============================================================

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initAccordion();
   initNavScroll();
   initSmoothScroll();
+  initHeroParallax();
 });
 
 /* ---------- Scroll Reveal ---------- */
@@ -19,14 +20,17 @@ function initScrollReveal() {
   );
 
   revealTargets.forEach(function (el) {
-    if (el.classList.contains('collections') ||
-        el.classList.contains('products') ||
-        el.classList.contains('shapes') ||
-        el.classList.contains('craft-grid') ||
-        el.classList.contains('certs') ||
-        el.classList.contains('details') ||
-        el.classList.contains('faq')) {
+    var staggerSet = [
+      'collections', 'products', 'shapes', 'craft-grid',
+      'certs', 'details', 'faq', 'custom-wrap', 'factory-grid'
+    ];
+    var altSet = ['collections', 'custom-wrap', 'factory-grid'];
+    var isStagger = staggerSet.some(function (c) { return el.classList.contains(c); });
+    if (isStagger) {
       el.classList.add('reveal-stagger');
+      if (altSet.some(function (c) { return el.classList.contains(c); })) {
+        el.classList.add('reveal-stagger--alt');
+      }
     } else {
       el.classList.add('reveal');
     }
@@ -54,6 +58,36 @@ function initScrollReveal() {
   document.querySelectorAll('.reveal, .reveal-stagger').forEach(function (el) {
     observer.observe(el);
   });
+}
+
+/* ---------- Hero subtle parallax (desktop only, respects reduced motion) ---------- */
+function initHeroParallax() {
+  var hero = document.querySelector('.hero');
+  var imgWrap = document.querySelector('.hero__image');
+  if (!hero || !imgWrap) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    if (window.innerWidth <= 900) { imgWrap.style.transform = ''; return; }
+    var rect = hero.getBoundingClientRect();
+    var vh = window.innerHeight;
+    if (rect.bottom < 0 || rect.top > vh) return;
+    var p = (vh - rect.top) / (vh + rect.height);
+    p = Math.max(0, Math.min(1, p));
+    var y = (0.5 - p) * 26;
+    imgWrap.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)';
+  }
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  update();
 }
 
 /* ---------- FAQ Accordion ---------- */
