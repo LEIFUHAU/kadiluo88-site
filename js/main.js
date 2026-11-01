@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initNavScroll();
   initSmoothScroll();
   initHeroParallax();
+  initMouseParallax();
   initLightbox();
 });
 
@@ -89,6 +90,39 @@ function initHeroParallax() {
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   update();
+}
+
+/* ---------- Hero subtle mouse-follow parallax on the text layer (desktop, restrained) ---------- */
+function initMouseParallax() {
+  var hero = document.querySelector('.hero');
+  var layer = document.querySelector('.hero__text');
+  if (!hero || !layer) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var targetX = 0, targetY = 0, curX = 0, curY = 0, ticking = false;
+  function raf() {
+    curX += (targetX - curX) * 0.08;
+    curY += (targetY - curY) * 0.08;
+    layer.style.transform = 'translate3d(' + curX.toFixed(2) + 'px,' + curY.toFixed(2) + 'px,0)';
+    if (Math.abs(targetX - curX) > 0.1 || Math.abs(targetY - curY) > 0.1) {
+      requestAnimationFrame(raf);
+    } else { ticking = false; }
+  }
+  function kick() {
+    if (!ticking) { ticking = true; requestAnimationFrame(raf); }
+  }
+  hero.addEventListener('mousemove', function (e) {
+    if (window.innerWidth <= 900) return;
+    var r = hero.getBoundingClientRect();
+    var nx = (e.clientX - r.left) / r.width - 0.5;
+    var ny = (e.clientY - r.top) / r.height - 0.5;
+    targetX = nx * 8;
+    targetY = ny * 5;
+    kick();
+  });
+  hero.addEventListener('mouseleave', function () {
+    targetX = 0; targetY = 0; kick();
+  });
 }
 
 /* ---------- FAQ Accordion ---------- */
