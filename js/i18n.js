@@ -391,6 +391,7 @@ function applyLang(lang) {
       if (sp) sp.textContent = b.spec[lang];
     });
   });
+  if (typeof window.updateCardLabels === "function") window.updateCardLabels();
 
   /* batch: collapsible counts */
   document.querySelectorAll(".section--products").forEach(function (sec) {

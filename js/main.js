@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initMouseParallax();
   initLightbox();
   initFeaturedRail();
+  initProductCards();
 });
 
 /* ---------- Scroll Reveal ---------- */
@@ -319,6 +320,70 @@ function handleSubmit(e) {
     btn.style.borderColor = '';
     btn.disabled = false;
   }, 3000);
+}
+
+/* ---------- Product card enhancements: material, finish tags, custom mark, WhatsApp ask ---------- */
+function updateCardLabels() {
+  var lang = (window.APP_I18N && APP_I18N.currentLang) || "en";
+  var dict = {
+    en: { mat: "Material · Glass", custom: "Custom Available", ask: "Inquire on WhatsApp" },
+    zh: { mat: "材质 · 玻璃", custom: "支持定制", ask: "WhatsApp 询价" }
+  }[lang] || {};
+  document.querySelectorAll(".product-card__mat").forEach(function (el) { el.textContent = dict.mat; });
+  document.querySelectorAll(".product-card__custom").forEach(function (el) { el.textContent = dict.custom; });
+  document.querySelectorAll(".product-card__ask").forEach(function (el) { el.textContent = dict.ask; });
+}
+window.updateCardLabels = updateCardLabels;
+
+function initProductCards() {
+  var tags = {
+    round:   { en: ["Spray Coating", "Frosting", "Electroplating"], zh: ["喷涂上色", "蒙砂", "电镀"] },
+    square:  { en: ["Spray Coating", "Silk Printing", "Frosting"], zh: ["喷涂上色", "丝印", "蒙砂"] },
+    special: { en: ["Custom Mold", "Electroplating", "Ombre / Crackle"], zh: ["开模定制", "电镀", "渐变 / 冰裂纹"] }
+  };
+  ["round", "square", "special"].forEach(function (id) {
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    sec.querySelectorAll(".product-card").forEach(function (card) {
+      var body = card.querySelector(".product-card__body");
+      if (!body || body.querySelector(".product-card__meta")) return;
+
+      var meta = document.createElement("div");
+      meta.className = "product-card__meta";
+      var mat = document.createElement("span");
+      mat.className = "product-card__mat";
+      var cust = document.createElement("span");
+      cust.className = "product-card__custom";
+      meta.appendChild(mat);
+      meta.appendChild(cust);
+
+      var tagWrap = document.createElement("div");
+      tagWrap.className = "product-card__tags";
+      var lang = (window.APP_I18N && APP_I18N.currentLang) || "en";
+      (tags[id] && tags[id][lang] || []).forEach(function (t) {
+        var s = document.createElement("span");
+        s.className = "ptag";
+        s.textContent = t;
+        tagWrap.appendChild(s);
+      });
+
+      var name = (card.querySelector(".product-card__name em") || {}).textContent || "";
+      var ask = document.createElement("a");
+      ask.className = "product-card__ask";
+      ask.target = "_blank";
+      ask.rel = "noopener";
+      ask.addEventListener("click", function (e) {
+        e.preventDefault();
+        var msg = "Hello CATILLO, I am interested in the " + name + " perfume bottle. Please share available options, finishes and a quotation.";
+        window.open("https://wa.me/" + WA_BUSINESS_NUMBER + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+      });
+
+      body.appendChild(meta);
+      body.appendChild(tagWrap);
+      body.appendChild(ask);
+    });
+  });
+  updateCardLabels();
 }
 
 /* ---------- Product image lightbox (prev / next within same category) ---------- */
