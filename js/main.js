@@ -275,7 +275,8 @@ function initSmoothScroll() {
   });
 }
 
-/* ---------- Form submission ---------- */
+/* ---------- Form submission: collect inquiry and open WhatsApp prefilled ---------- */
+var WA_BUSINESS_NUMBER = '8618965869753';
 function handleSubmit(e) {
   e.preventDefault();
 
@@ -284,24 +285,40 @@ function handleSubmit(e) {
   var lang = (window.APP_I18N && APP_I18N.currentLang) || 'en';
   var submitText = (window.I18N && I18N[lang] && I18N[lang]['cta.submit']) || 'Send Inquiry';
 
-  btn.textContent = (window.I18N && I18N[lang] && I18N[lang]['cta.sending']) || 'Sending...';
-  btn.style.opacity = '0.6';
-  btn.disabled = true;
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  var lines = ['Hello CATILLO, I would like to inquire about perfume packaging.'];
+  var fields = [
+    ['Name', 'name'],
+    ['Company', 'company'],
+    ['Email', 'email'],
+    ['Product Type', 'product'],
+    ['Estimated Quantity', 'quantity'],
+    ['Message', 'message']
+  ];
+  fields.forEach(function (pair) {
+    var v = val(pair[1]);
+    if (v) lines.push(pair[0] + ': ' + v);
+  });
+
+  var url = 'https://wa.me/' + WA_BUSINESS_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+  window.open(url, '_blank', 'noopener');
+
+  btn.textContent = (window.I18N && I18N[lang] && I18N[lang]['cta.sent']) || 'Inquiry Sent ✓';
+  btn.style.opacity = '1';
+  btn.style.background = '#B08D57';
+  btn.style.borderColor = '#B08D57';
+  form.reset();
 
   setTimeout(function () {
-    btn.textContent = (window.I18N && I18N[lang] && I18N[lang]['cta.sent']) || 'Inquiry Sent ✓';
-    btn.style.opacity = '1';
-    btn.style.background = '#B08D57';
-    btn.style.borderColor = '#B08D57';
-    form.reset();
-
-    setTimeout(function () {
-      btn.textContent = submitText;
-      btn.style.background = '';
-      btn.style.borderColor = '';
-      btn.disabled = false;
-    }, 3000);
-  }, 1200);
+    btn.textContent = submitText;
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.disabled = false;
+  }, 3000);
 }
 
 /* ---------- Product image lightbox (prev / next within same category) ---------- */
