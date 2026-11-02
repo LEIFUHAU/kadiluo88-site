@@ -2,6 +2,22 @@
    CATILLO Packaging — Main JavaScript
    ============================================================ */
 
+/* GA4 measurement ID. Leave "" until Analytics provides G-XXXX;
+   an empty value means no tracking script is loaded at all. */
+var GA_MEASUREMENT_ID = "G-ND1W1J8WV3";
+function initGA4() {
+  if (!GA_MEASUREMENT_ID) return;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  var s = document.createElement("script");
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_MEASUREMENT_ID;
+  document.head.appendChild(s);
+  gtag("js", new Date());
+  gtag("config", GA_MEASUREMENT_ID, { send_page_view: true });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initI18n();
   initScrollReveal();
@@ -14,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initLightbox();
   initFeaturedRail();
   initProductCards();
+  initGA4();
 });
 
 /* ---------- Scroll Reveal ---------- */
